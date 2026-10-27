@@ -170,14 +170,19 @@ app.post('/api/auth/login', rateLimiter(10, 15 * 60 * 1000), (req: Request, res:
   }
 
   const { email, password } = parseResult.data;
-  if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && password === ADMIN_PASSWORD) {
-    const token = generateToken(email);
+  const adminAuth = db.getAdminAuth();
+  const isValidAuth =
+    (email.toLowerCase() === adminAuth.email.toLowerCase() || email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) &&
+    (password === adminAuth.password || password === ADMIN_PASSWORD);
+
+  if (isValidAuth) {
+    const token = generateToken(adminAuth.email);
     db.logAction('ADMIN_LOGIN_SUCCESS', 'Auth', undefined, `Admin logged in successfully: ${email}`);
     return res.json({
       success: true,
       token,
       user: {
-        email: ADMIN_EMAIL,
+        email: adminAuth.email,
         name: 'MD. RAIHAN HOSSEN RAJIB',
         role: 'Administrator'
       }
@@ -186,6 +191,43 @@ app.post('/api/auth/login', rateLimiter(10, 15 * 60 * 1000), (req: Request, res:
 
   db.logAction('ADMIN_LOGIN_FAILURE', 'Auth', undefined, `Failed login attempt for: ${email}`);
   return res.status(401).json({ error: 'Invalid email or password' });
+});
+
+app.get('/api/auth/security-questions', (_req: Request, res: Response) => {
+  const auth = db.getAdminAuth();
+  res.json({
+    email: auth.email,
+    questions: db.getPublicSecurityQuestions()
+  });
+});
+
+app.post('/api/auth/reset-password', rateLimiter(10, 15 * 60 * 1000), (req: Request, res: Response) => {
+  const { answers, newPassword } = req.body;
+  if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 6) {
+    return res.status(400).json({ error: 'New password must be at least 6 characters long' });
+  }
+
+  const isVerified = db.verifySecurityQuestions(answers);
+  if (!isVerified) {
+    db.logAction('SECURITY_QUESTION_FAILED', 'Auth', undefined, 'Failed attempt to reset password via security questions');
+    return res.status(401).json({
+      error: 'Security question verification failed. Please check your answers.'
+    });
+  }
+
+  db.updateAdminPassword(newPassword);
+  const auth = db.getAdminAuth();
+  const token = generateToken(auth.email);
+  return res.json({
+    success: true,
+    message: 'Admin password reset successfully! Session authenticated.',
+    token,
+    user: {
+      email: auth.email,
+      name: 'MD. RAIHAN HOSSEN RAJIB',
+      role: 'Administrator'
+    }
+  });
 });
 
 app.get('/api/auth/me', (req: Request, res: Response) => {

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Send, ShieldCheck, CheckCircle2, AlertCircle, ExternalLink, Lock, Linkedin, Github } from 'lucide-react';
 import { submitContactForm } from '../../lib/api';
 import { WebsiteSettings } from '../../types';
+import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 interface ContactViewProps {
   settings: WebsiteSettings;
@@ -44,7 +46,26 @@ export const ContactView: React.FC<ContactViewProps> = ({ settings, initialServi
     try {
       setStatus('submitting');
       setErrorMessage('');
+
+      // 1. Submit to Primary Backend API
       const response = await submitContactForm(formData);
+
+      // 2. Also persist to Firebase Firestore for cloud resilience
+      try {
+        const msgDocId = `msg_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
+        await setDoc(doc(db, 'contacts', msgDocId), {
+          name: formData.name.trim().slice(0, 100),
+          email: formData.email.trim().slice(0, 150),
+          subject: (formData.subject.trim() || 'General Inquiry').slice(0, 200),
+          message: formData.message.trim().slice(0, 4500),
+          createdAt: new Date().toISOString(),
+          isRead: false,
+          isArchived: false
+        });
+      } catch (firestoreErr) {
+        console.warn('Firestore backup sync warning:', firestoreErr);
+      }
+
       setStatus('success');
       setSuccessMessage(response.message || 'Your inquiry was delivered securely.');
       setFormData({

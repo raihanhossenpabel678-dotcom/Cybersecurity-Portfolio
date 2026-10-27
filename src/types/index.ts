@@ -168,3 +168,8 @@ export interface AdminStats {
   totalMessagesCount: number;
   mediaCount: number;
 }
+
+export interface SecurityQuestionPublic {
+  id: string;
+  question: string;
+}

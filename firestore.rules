@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        request.auth.token.email == 'raihanhossenpabel678@gmail.com' &&
+        request.auth.token.email_verified == true;
+    }
+
+    // Connection testing endpoint
+    match /test/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Website General Settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Portfolio Projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Client Inquiries / Contact Messages
+    match /contacts/{messageId} {
+      allow create: if isValidId(messageId) &&
+        incoming().keys().hasAll(['name', 'email', 'subject', 'message']) &&
+        incoming().name is string && incoming().name.size() > 0 && incoming().name.size() <= 120 &&
+        incoming().email is string && incoming().email.size() > 0 && incoming().email.size() <= 150 &&
+        incoming().subject is string && incoming().subject.size() > 0 && incoming().subject.size() <= 200 &&
+        incoming().message is string && incoming().message.size() > 0 && incoming().message.size() <= 5000;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

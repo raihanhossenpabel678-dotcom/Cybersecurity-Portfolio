@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "WebsiteSettings": {
+      "title": "WebsiteSettings",
+      "description": "Portfolio brand metadata and professional configuration for MD. Raihan Hossen Rajib",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "tagline": { "type": "string" },
+        "heroHeadline": { "type": "string" },
+        "heroSubheadline": { "type": "string" },
+        "professionalTitle": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "fiverrUrl": { "type": "string" },
+        "linkedinUrl": { "type": "string" },
+        "githubUrl": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "footerText": { "type": "string" }
+      },
+      "required": ["siteName", "heroHeadline"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "Inbound client security inquiries submitted through the contact form",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "isArchived": { "type": "boolean" }
+      },
+      "required": ["name", "email", "subject", "message", "createdAt"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Portfolio cybersecurity projects and security audits",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "category": { "type": "string" },
+        "summary": { "type": "string" },
+        "published": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "slug", "category", "summary"]
+    }
+  },
+  "firestore": {
+    "/settings/general": {
+      "schema": "WebsiteSettings",
+      "description": "Global website configuration document"
+    },
+    "/contacts/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Client inquiry messages and consultations"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Cybersecurity projects, remediation audits, and security tooling"
+    }
+  }
+}

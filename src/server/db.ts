@@ -24,6 +24,40 @@ import {
   initialBlogPosts
 } from './seedData';
 
+export interface AdminSecurityQuestion {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface AdminAuthData {
+  email: string;
+  password: string;
+  securityQuestions: AdminSecurityQuestion[];
+}
+
+export const defaultAdminAuth: AdminAuthData = {
+  email: process.env.ADMIN_EMAIL || 'raihanhossenpabel678@gmail.com',
+  password: process.env.ADMIN_PASSWORD || 'RajibSecure2026!',
+  securityQuestions: [
+    {
+      id: 'q1',
+      question: 'Where did you complete your Diploma in Cyber Security?',
+      answer: 'arena web security'
+    },
+    {
+      id: 'q2',
+      question: 'What is your primary specialized CMS security area?',
+      answer: 'wordpress'
+    },
+    {
+      id: 'q3',
+      question: 'What programming language and framework do you develop security tools with?',
+      answer: 'python'
+    }
+  ]
+};
+
 interface DatabaseData {
   settings: WebsiteSettings;
   services: ServiceItem[];
@@ -35,6 +69,7 @@ interface DatabaseData {
   contactMessages: ContactMessage[];
   mediaLibrary: MediaItem[];
   auditLogs: AuditLogItem[];
+  adminAuth?: AdminAuthData;
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
@@ -80,7 +115,8 @@ class DatabaseEngine {
           blogPosts: parsed.blogPosts || initialBlogPosts,
           contactMessages: parsed.contactMessages || [],
           mediaLibrary: parsed.mediaLibrary || [],
-          auditLogs: parsed.auditLogs || []
+          auditLogs: parsed.auditLogs || [],
+          adminAuth: parsed.adminAuth || defaultAdminAuth
         };
       }
     } catch (err) {
@@ -97,6 +133,7 @@ class DatabaseEngine {
       blogPosts: initialBlogPosts,
       contactMessages: [],
       mediaLibrary: [],
+      adminAuth: defaultAdminAuth,
       auditLogs: [
         {
           id: 'log-init',
@@ -110,6 +147,45 @@ class DatabaseEngine {
 
     this.saveData(initialData);
     return initialData;
+  }
+
+  // --- Admin Authentication & Security Questions ---
+  getAdminAuth(): AdminAuthData {
+    return this.data.adminAuth || defaultAdminAuth;
+  }
+
+  getPublicSecurityQuestions(): { id: string; question: string }[] {
+    const auth = this.getAdminAuth();
+    return auth.securityQuestions.map((q) => ({ id: q.id, question: q.question }));
+  }
+
+  verifySecurityQuestions(answers: Record<string, string>): boolean {
+    const auth = this.getAdminAuth();
+    if (!answers || typeof answers !== 'object') return false;
+    for (const q of auth.securityQuestions) {
+      const given = (answers[q.id] || '').trim().toLowerCase();
+      const expected = q.answer.trim().toLowerCase();
+      if (!given) return false;
+      // Tolerant keyword matching (e.g., 'arena', 'arena web security', 'wordpress', 'python', 'django')
+      const isMatch =
+        given === expected ||
+        given.includes(expected) ||
+        expected.includes(given) ||
+        (q.id === 'q1' && (given.includes('arena') || given.includes('security'))) ||
+        (q.id === 'q2' && given.includes('word')) ||
+        (q.id === 'q3' && (given.includes('py') || given.includes('django')));
+      if (!isMatch) return false;
+    }
+    return true;
+  }
+
+  updateAdminPassword(newPassword: string): void {
+    if (!this.data.adminAuth) {
+      this.data.adminAuth = { ...defaultAdminAuth };
+    }
+    this.data.adminAuth.password = newPassword;
+    this.saveData();
+    this.logAction('ADMIN_PASSWORD_RESET', 'Auth', undefined, 'Password successfully reset via security questions');
   }
 
   private saveData(dataToSave?: DatabaseData) {
