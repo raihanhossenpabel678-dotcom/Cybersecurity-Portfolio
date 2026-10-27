@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #060814;
+  --bg-secondary: #0c0f24;
+  --bg-card: #121633;
+  --border-muted: rgba(99, 102, 241, 0.18);
+  --border-active: rgba(139, 92, 246, 0.4);
+  --color-blue: #2563eb;
+  --color-cyan: #38bdf8;
+  --color-indigo: #6366f1;
+  --color-purple: #7c3aed;
+  --color-violet: #8b5cf6;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+body {
+  background-color: #060814;
+  color: #f8fafc;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Blue-Purple Theme Surfaces */
+.bg-canvas {
+  background-color: #060814;
+}
+
+.bg-surface-secondary {
+  background-color: #0c0f24;
+}
+
+.bg-surface-card {
+  background-color: #121633;
+}
+
+/* Glow Utilities */
+.blue-purple-glow {
+  box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.25), 0 0 45px -5px rgba(124, 58, 237, 0.3);
+}
+
+.blue-purple-gradient-text {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 45%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Rotating Gradient Ring for Profile Avatar */
+@keyframes spin-gradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes avatar-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-aura {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.06);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-gradient 8s linear infinite;
+}
+
+.animate-avatar-float {
+  animation: avatar-float 4.5s ease-in-out infinite;
+}
+
+.animate-pulse-aura {
+  animation: pulse-aura 3.5s ease-in-out infinite;
+}
+
+/* Typewriter Blinking Cursor */
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  width: 3px;
+  height: 1em;
+  background-color: #38bdf8;
+  vertical-align: -0.1em;
+  animation: blink 0.9s infinite;
+}
+
+/* Custom subtle scrollbar in Blue-Purple */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060814;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e264f;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}

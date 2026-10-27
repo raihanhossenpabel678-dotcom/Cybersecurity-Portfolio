@@ -1,0 +1,608 @@
+{
+  "settings": {
+    "id": "settings-default",
+    "siteName": "MD. RAIHAN HOSSEN RAJIB",
+    "professionalTitle": "Cybersecurity Specialist & Ethical Hacker",
+    "heroHeadline": "Securing Digital Assets. Strengthening Web Applications.",
+    "heroDescription": "Specialized in WordPress Malware Removal, Defense Hardening, Authorized Web Application Penetration Testing, Ethical OSINT, and Python/Django Security.",
+    "bioContent": "I am MD. Raihan Hossen Rajib, a cybersecurity professional holding a one-year Diploma in Cyber Security and Ethical Hacking from Arena Web Security and extensive training in Python with Django development. I partner with global website owners and business teams to eliminate persistent malware infections, harden content management systems, uncover critical web application logic flaws, and conduct passive OSINT assessments under strict rules of engagement.",
+    "contactEmail": "raihanhossenpabel678@gmail.com",
+    "fiverrUrl": "https://www.fiverr.com",
+    "linkedinUrl": "https://www.linkedin.com",
+    "githubUrl": "https://github.com",
+    "profilePhotoUrl": "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_original/v1/attachments/profile/photo/f01567e5c00751cdd212c4226e87b056-1783586978424/26de0cae-3903-4085-ad24-89ad1017ca54.jpg",
+    "footerText": "© 2026 MD. RAIHAN HOSSEN RAJIB. Dedicated to proactive web security and ethical application defense.",
+    "sectionVisibility": {
+      "projects": true,
+      "services": true,
+      "caseStudies": true,
+      "skills": true,
+      "certifications": true,
+      "blog": true,
+      "contact": true
+    },
+    "updatedAt": "2026-10-27T04:16:37.073Z"
+  },
+  "services": [
+    {
+      "id": "srv-1",
+      "title": "WordPress Malware Removal & Recovery",
+      "slug": "wordpress-malware-removal-recovery",
+      "summary": "Comprehensive eradication of malicious scripts, conditional redirects, hidden administrative backdoors, and recovery from search engine blacklists.",
+      "description": "When a WordPress installation is compromised, automated plugins often leave persistent cron jobs and obfuscated payloads behind. My service conducts deep filesystem and database forensics to identify all malicious artifacts, sanitize infected core and theme files, verify core checksum integrity, and request review for Google/McAfee blacklists.",
+      "deliverables": [
+        "Complete deep file and database malware cleanup",
+        "Removal of SEO spam injections and malicious redirect scripts",
+        "Neutralization of hidden admin accounts and rogue cron jobs",
+        "Google Safe Browsing & search engine blacklist delisting assistance",
+        "Sanitized backup generation and post-cleanup forensic report"
+      ],
+      "scope": "Single or Multi-site WordPress Environment",
+      "iconName": "ShieldAlert",
+      "inquiryUrl": "/contact?service=malware-removal",
+      "isPublished": true,
+      "sortOrder": 1,
+      "createdAt": "2026-10-27T04:16:37.073Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "srv-2",
+      "title": "WordPress Security Hardening",
+      "slug": "wordpress-security-hardening",
+      "summary": "Proactive defense-in-depth implementation including server-level access rules, WAF configuration, and attack surface reduction.",
+      "description": "Transform your WordPress installation into a resilient target against automated brute-force, zero-day botnets, and credential stuffing attacks. We implement strict file permissions, disable REST API user enumeration, enforce rate-limiting, and deploy Web Application Firewall rules.",
+      "deliverables": [
+        "Hardened .htaccess and Nginx security header rules",
+        "Disabling of XML-RPC, author enumeration, and dangerous file execution",
+        "Two-Factor Authentication (2FA) and brute-force mitigation rules",
+        "WP-Config encryption salts renewal and database prefix isolation",
+        "Automated real-time integrity monitoring setup"
+      ],
+      "scope": "Production WordPress Deployment",
+      "iconName": "ShieldCheck",
+      "inquiryUrl": "/contact?service=security-hardening",
+      "isPublished": true,
+      "sortOrder": 2,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "srv-3",
+      "title": "WordPress Bug Fixing & Triage",
+      "slug": "wordpress-bug-fixing",
+      "summary": "Rapid resolution of PHP fatal errors, White Screen of Death (WSOD), broken database queries, and plugin incompatibilities.",
+      "description": "In-depth diagnostic triage to identify and resolve critical functional failures, theme regressions, and server configuration timeouts without risking existing content or database integrity.",
+      "deliverables": [
+        "Root cause analysis of PHP memory exhaustion and 500 internal errors",
+        "Resolution of plugin/theme version collision bugs",
+        "Database table overhead repair and transient cache cleansing",
+        "Detailed bug diagnosis summary with prevention recommendations"
+      ],
+      "scope": "Specific WordPress Functional Issue or Site Outage",
+      "iconName": "Bug",
+      "inquiryUrl": "/contact?service=bug-fixing",
+      "isPublished": true,
+      "sortOrder": 3,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "srv-4",
+      "title": "Ethical OSINT & Digital Footprint Research",
+      "slug": "ethical-osint-footprint-research",
+      "summary": "Passive, strictly ethical open-source intelligence gathering to uncover exposed assets, leaked credentials, and organizational risk vectors.",
+      "description": "Discover what external adversaries can learn about your organization using passive OSINT methodologies. Identifies exposed subdomains, misconfigured cloud storage, leaked developer tokens on public code repositories, and leaked corporate email exposure.",
+      "deliverables": [
+        "Passive subdomain and shadow IT asset catalog",
+        "Dark web and public breach credential exposure review",
+        "Public repository and source code credential leak search",
+        "Comprehensive OSINT threat profile and defensive recommendations"
+      ],
+      "scope": "Authorized Corporate Domain & Digital Footprint",
+      "iconName": "Search",
+      "inquiryUrl": "/contact?service=osint-research",
+      "isPublished": true,
+      "sortOrder": 4,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "srv-5",
+      "title": "Pre-Bug-Bounty Security Assessment",
+      "slug": "pre-bug-bounty-assessment",
+      "summary": "Thorough testing and remediation verification to eliminate common vulnerabilities prior to public bug bounty program launches.",
+      "description": "Save bounties and engineering bandwidth by identifying OWASP Top 10 weaknesses, rate-limiting gaps, and misconfigurations before opening your public vulnerability disclosure program.",
+      "deliverables": [
+        "Systematic testing against OWASP Web Top 10 vulnerabilities",
+        "Business logic flaw and session management inspection",
+        "Access control matrix and privilege escalation checks",
+        "Actionable prioritized remediation tracker"
+      ],
+      "scope": "Staging or Pre-Production Web Application",
+      "iconName": "Terminal",
+      "inquiryUrl": "/contact?service=pre-bug-bounty",
+      "isPublished": true,
+      "sortOrder": 5,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "srv-6",
+      "title": "Authorized Web Application Penetration Testing",
+      "slug": "authorized-web-app-pentesting",
+      "summary": "Methodical grey-box and black-box penetration testing strictly executed under signed rules of engagement with verifiable reports.",
+      "description": "Simulates real-world attack vectors against web applications, API endpoints, and authentication workflows. All testing is conducted ethically within defined boundary parameters with zero disruption to business operations.",
+      "deliverables": [
+        "Comprehensive testing methodology covering authentication, authorization, and data validation",
+        "Detailed proof-of-concept walkthroughs without destructive payloads",
+        "Risk scoring based on CVSS 3.1 methodology",
+        "Developer-friendly code-level remediation guidance and post-fix re-test"
+      ],
+      "scope": "Authorized Web Applications, APIs, and Admin Portals",
+      "iconName": "Lock",
+      "inquiryUrl": "/contact?service=pentesting",
+      "isPublished": true,
+      "sortOrder": 6,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "srv-7",
+      "title": "Python and Django Security Development",
+      "slug": "python-django-security-development",
+      "summary": "Developing secure web applications, automated vulnerability scanners, log analysis tooling, and custom security scripts.",
+      "description": "Leveraging Python and Django framework capabilities to build robust, secure-by-default web platforms, custom security automation pipelines, and API integrations with strict input sanitization and cryptographic integrity.",
+      "deliverables": [
+        "Django web applications engineered with security-hardened ORM queries",
+        "Custom Python scripts for automated security checks and log parsing",
+        "JWT/Session security audit and CSRF/CORS hardening",
+        "Clean, documented, and type-annotated codebase"
+      ],
+      "scope": "New Web Project, Security Scripting, or Existing Django Codebase",
+      "iconName": "Code2",
+      "inquiryUrl": "/contact?service=python-django",
+      "isPublished": true,
+      "sortOrder": 7,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Enterprise WordPress Malware Disinfection & Hardening",
+      "slug": "enterprise-wordpress-malware-disinfection",
+      "summary": "Recovered an e-commerce platform compromised by a multi-stage PHP backdoor and spam redirect payload, achieving zero reinfection.",
+      "description": "An online storefront experienced deceptive site warnings from Google Chrome and unauthorized admin account creation. Forensics revealed a polymorphic eval-based webshell nested inside `/wp-content/uploads` and persistent database injection in the `wp_posts` table.",
+      "category": "WordPress Security",
+      "technologies": [
+        "WordPress",
+        "PHP Forensics",
+        "MySQL",
+        "Linux CLI",
+        "WP-CLI",
+        "ModSecurity"
+      ],
+      "coverImage": "",
+      "galleryImages": [],
+      "challenges": "The malicious actors utilized cron-triggered re-infection routines that continuously restored deleted files whenever admin pages were accessed.",
+      "methodology": "Isolated the web server environment, killed active foreign worker processes, extracted clean database dumps, inspected all modified files against WordPress core checksums, and sanitized tainted serialized PHP data.",
+      "remediation": "Removed 14 malicious PHP files, eliminated 3 rogue administrator accounts, locked down upload folder execution with .htaccess/nginx rules, and enforced 2FA.",
+      "verifiedResults": "Blacklist delisted by Google Safe Browsing within 24 hours. Zero reinfection incidents recorded during the 90-day post-audit monitoring window.",
+      "externalUrl": "",
+      "isFeatured": true,
+      "isPublished": true,
+      "sortOrder": 1,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "proj-2",
+      "title": "OWASP Top 10 Security Audit for Django API Platform",
+      "slug": "owasp-top-10-django-security-audit",
+      "summary": "Authorized grey-box penetration test identifying Broken Object Level Authorization (BOLA) and insecure Direct Object Reference in REST endpoints.",
+      "description": "Conducted a structured pre-launch security evaluation for a financial tracking API built on Django Rest Framework. Verified authentication flows, rate limiting, token expiration, and database query isolation.",
+      "category": "Penetration Testing",
+      "technologies": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "Burp Suite",
+        "Postman",
+        "PostgreSQL"
+      ],
+      "coverImage": "",
+      "galleryImages": [],
+      "challenges": "Detecting subtle tenant data leakage that occurred only when combining pagination parameters with unvalidated UUID filters.",
+      "methodology": "Mapped out all exposed API routes, tested authentication boundary controls, fuzzing query parameters for SQL injection and NoSQL injection, and verified CORS headers.",
+      "remediation": "Implemented scoped queryset filtering in Django views, enforced explicit ownership permissions in DRF serializer layers, and added IP-based throttle rates.",
+      "verifiedResults": "100% of identified authorization gaps resolved prior to production launch; verified via automated regression testing.",
+      "externalUrl": "",
+      "isFeatured": true,
+      "isPublished": true,
+      "sortOrder": 2,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "proj-3",
+      "title": "Automated OSINT Digital Footprint Profiler Tool",
+      "slug": "automated-osint-digital-footprint-profiler",
+      "summary": "Custom Python application aggregating public DNS records, SSL certificates, and WHOIS archives to visualize external organizational exposure.",
+      "description": "Designed and developed an ethical intelligence analysis script that performs passive reconnaissance without sending active intrusive probes to target systems.",
+      "category": "Development & Scripting",
+      "technologies": [
+        "Python 3",
+        "CertStream",
+        "DNS Recon",
+        "Shodan API",
+        "Rich CLI",
+        "SQLite"
+      ],
+      "coverImage": "",
+      "galleryImages": [],
+      "challenges": "Handling rate limits from multiple public registries while correlating stale DNS records with active IP allocations.",
+      "methodology": "Architected an asynchronous worker queue in Python to fetch TLS certificates in real-time and correlate wildcard domains.",
+      "remediation": "Identified 6 abandoned subdomains pointing to unallocated Amazon S3 buckets, preventing potential Subdomain Takeover attacks.",
+      "verifiedResults": "Reduced passive attack surface footprint mapping time from 8 hours to under 12 minutes per target organization.",
+      "externalUrl": "",
+      "isFeatured": true,
+      "isPublished": true,
+      "sortOrder": 3,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "cs-1",
+      "title": "Remediating Persistent Japanese SEO Keyword Spam in WordPress",
+      "slug": "remediating-japanese-seo-spam-wordpress",
+      "summary": "Forensic breakdown and resolution of a stealth Japanese keyword hack involving dynamic server-side user-agent cloaking.",
+      "engagementType": "Authorized Client Engagement",
+      "authorizedScope": "Authorized audit of client web infrastructure under formal agreement.",
+      "methodology": "Utilized curl with Googlebot User-Agent simulation to identify cloaked response headers. Inspected `.htaccess` and server root configuration for conditional rewrite rules.",
+      "findingsSummary": "Identified an encoded PHP script injected into `index.php` that conditionally returned Japanese pharmaceutical SEO links strictly when the requesting User-Agent matched search engine crawlers.",
+      "findingsSeverity": "High",
+      "sanitizedEvidence": "Conditional regex matching `HTTP_USER_AGENT` for `Googlebot|bingbot|Baiduspider` serving base64-decoded spam links while presenting ordinary content to logged-in users.",
+      "remediationSteps": "Purged malicious conditional directives from `.htaccess`, replaced all core WordPress files with verified clean copies, purged Google search cache via Search Console, and locked write permissions on root directory.",
+      "verificationOutcome": "Search results returned to authentic brand titles within 7 days, with complete restoration of organic search visibility and clean security re-scans.",
+      "isPublished": true,
+      "sortOrder": 1,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "cs-2",
+      "title": "Laboratory Simulation: Exploiting & Hardening Insecure Direct Object References (IDOR)",
+      "slug": "lab-simulation-idor-exploitation-and-hardening",
+      "summary": "Educational research and controlled laboratory simulation demonstrating how IDOR vulnerabilities arise and how to patch them in Django ORM.",
+      "engagementType": "Laboratory Assessment",
+      "authorizedScope": "Self-hosted isolated laboratory environment configured strictly for vulnerability research and educational demonstration.",
+      "methodology": "Constructed vulnerable Django views relying solely on `request.GET.get(\"document_id\")` without validating user session ownership. Automated horizontal privilege traversal.",
+      "findingsSummary": "Demonstrated how an authenticated user at Tier 1 could access invoices and private documents belonging to any other user by simply incrementing consecutive record IDs.",
+      "findingsSeverity": "Critical",
+      "sanitizedEvidence": "Controlled GET `/api/v1/invoices/1042` returning 200 OK with cross-tenant personal identifiable information (PII) during simulated benchmark.",
+      "remediationSteps": "Refactored model querying to enforce `Invoice.objects.filter(id=pk, account=request.user.account).first_or_404()`, replaced sequential auto-incrementing IDs with cryptographically secure UUIDv4, and added automated unit tests for authorization checks.",
+      "verificationOutcome": "100% of unauthorized requests intercepted with HTTP 404/403 responses. Validated in CI test suite across all user permission tiers.",
+      "isPublished": true,
+      "sortOrder": 2,
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    }
+  ],
+  "skills": [
+    {
+      "id": "sk-1",
+      "name": "WordPress Malware Removal & Forensics",
+      "category": "WordPress Security",
+      "proficiency": 95,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 1,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-2",
+      "name": "Core & Database Hardening",
+      "category": "WordPress Security",
+      "proficiency": 92,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 2,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-3",
+      "name": "WAF & .htaccess Rule Architecture",
+      "category": "WordPress Security",
+      "proficiency": 90,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 3,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-4",
+      "name": "Blacklist Delisting (Google, McAfee)",
+      "category": "WordPress Security",
+      "proficiency": 88,
+      "isHighlighted": false,
+      "isPublic": true,
+      "sortOrder": 4,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-5",
+      "name": "OWASP Top 10 Assessment",
+      "category": "Penetration Testing",
+      "proficiency": 90,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 5,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-6",
+      "name": "Burp Suite Professional & Proxying",
+      "category": "Penetration Testing",
+      "proficiency": 88,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 6,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-7",
+      "name": "Authentication & Session Flaws",
+      "category": "Penetration Testing",
+      "proficiency": 86,
+      "isHighlighted": false,
+      "isPublic": true,
+      "sortOrder": 7,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-8",
+      "name": "Vulnerability Reporting & CVSS 3.1",
+      "category": "Penetration Testing",
+      "proficiency": 90,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 8,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-9",
+      "name": "Python for Cybersecurity & Automation",
+      "category": "Development & Scripting",
+      "proficiency": 90,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 9,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-10",
+      "name": "Django Framework & ORM Hardening",
+      "category": "Development & Scripting",
+      "proficiency": 87,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 10,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-11",
+      "name": "Linux Shell & Bash Scripting",
+      "category": "Development & Scripting",
+      "proficiency": 88,
+      "isHighlighted": false,
+      "isPublic": true,
+      "sortOrder": 11,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-12",
+      "name": "SQL Query Analysis & Injection Defense",
+      "category": "Development & Scripting",
+      "proficiency": 85,
+      "isHighlighted": false,
+      "isPublic": true,
+      "sortOrder": 12,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-13",
+      "name": "Passive Subdomain & Asset Discovery",
+      "category": "OSINT & Reconnaissance",
+      "proficiency": 92,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 13,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-14",
+      "name": "Credential Leak & Breach Intelligence",
+      "category": "OSINT & Reconnaissance",
+      "proficiency": 89,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 14,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-15",
+      "name": "Digital Footprint Threat Profiling",
+      "category": "OSINT & Reconnaissance",
+      "proficiency": 87,
+      "isHighlighted": false,
+      "isPublic": true,
+      "sortOrder": 15,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-16",
+      "name": "Nmap & Network Port Auditing",
+      "category": "Security Tools",
+      "proficiency": 88,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 16,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-17",
+      "name": "WPScan & CMS Vulnerability Scanners",
+      "category": "Security Tools",
+      "proficiency": 94,
+      "isHighlighted": true,
+      "isPublic": true,
+      "sortOrder": 17,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "sk-18",
+      "name": "Wireshark & Packet Inspection",
+      "category": "Security Tools",
+      "proficiency": 80,
+      "isHighlighted": false,
+      "isPublic": true,
+      "sortOrder": 18,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-1",
+      "title": "Diploma in Cyber Security and Ethical Hacking (1-Year)",
+      "issuer": "Arena Web Security",
+      "issueDate": "Verified Diploma Credential",
+      "credentialId": "AWS-DCS-VERIFIED",
+      "verificationUrl": "",
+      "certificateImage": "",
+      "isVerified": true,
+      "isPublished": true,
+      "sortOrder": 1,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "cert-2",
+      "title": "Professional Python with Django Development Training",
+      "issuer": "Professional Technical Institute",
+      "issueDate": "Certified Practical Training",
+      "credentialId": "PY-DJ-DEV-TRAINED",
+      "verificationUrl": "",
+      "certificateImage": "",
+      "isVerified": true,
+      "isPublished": true,
+      "sortOrder": 2,
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "post-1",
+      "title": "Anatomy of a WordPress Backdoor: Identifying Obfuscated PHP Payloads",
+      "slug": "anatomy-of-a-wordpress-backdoor-obfuscated-php",
+      "excerpt": "How modern attackers conceal persistent web shells inside legitimate plugin directories using multi-layer eval and base64 encodings, and how to detect them.",
+      "content": "When auditing a compromised WordPress site, the most dangerous misconception is assuming that deleting the obvious spam files solves the problem. Attackers routinely plant hidden secondary backdoors designed to reinstall themselves.\n\n### Common Hiding Locations\n1. Inside active plugin folders disguised as cached transients or language files (e.g., `wp-content/plugins/akismet/cache-tmp.php`).\n2. Inside `wp-includes` with filenames mimicking core files like `wp-includes/class-wp-hook-cache.php`.\n3. Within the active theme's `functions.php` utilizing `add_action('init', ...)` hooks.\n\n### Deobfuscating the Signature\nModern backdoors frequently employ:\n```php\n// Example of obfuscated payload pattern detected in the wild:\n$f = str_rot13('onfr64_qrpbqr');\n$payload = $f($_POST['auth_token']);\n@eval($payload);\n```\n\n### Remediation Protocol\n- **Compare with clean core checksums**: Use WP-CLI (`wp core verify-checksums`) to identify modified core files.\n- **Inspect rogue cron events**: Malicious actors schedule cron jobs in the database to re-fetch malware from external Command & Control servers.\n- **Lock down upload directories**: Deny direct script execution in `/wp-content/uploads/` using server-level directives.",
+      "category": "WordPress Security",
+      "tags": [
+        "WordPress",
+        "Malware Analysis",
+        "PHP Security",
+        "Incident Response"
+      ],
+      "readTime": "6 min read",
+      "isPublished": true,
+      "publishedAt": "2026-10-27T04:16:37.074Z",
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "post-2",
+      "title": "Ethical OSINT: How Public Metadata Exposes Web Applications",
+      "slug": "ethical-osint-how-metadata-exposes-web-applications",
+      "excerpt": "A practical guide on how passive open-source reconnaissance reveals internal infrastructure, forgotten staging servers, and exposed API keys without sending an active probe.",
+      "content": "Before an adversary sends a single HTTP request to your production application, they gather intelligence across public records and historical archives.\n\n### Primary Intelligence Channels\n1. **Certificate Transparency Logs**: Every time a domain requests an SSL certificate, it is broadcast to public logs. Subdomains like `staging-api.example.com` or `admin-test.example.com` are cataloged within seconds.\n2. **Public Code Repository Commits**: Developers occasionally push staging configuration files containing hardcoded database credentials or third-party API secret tokens.\n3. **DNS Historical Records**: Old A-records frequently point to deprecated virtual private servers that remain online without updated security patches.\n\n### Defensive Best Practices\n- Implement automated secret scanning on Git commits.\n- Enforce private DNS for internal staging environments.\n- Regularly audit public certificate transparency streams for unauthorized wildcard certificates.",
+      "category": "OSINT & Reconnaissance",
+      "tags": [
+        "OSINT",
+        "Reconnaissance",
+        "Attack Surface",
+        "Threat Modeling"
+      ],
+      "readTime": "5 min read",
+      "isPublished": true,
+      "publishedAt": "2026-10-27T04:16:37.074Z",
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    },
+    {
+      "id": "post-3",
+      "title": "Hardening Django Applications: Defense-in-Depth for Production APIs",
+      "slug": "hardening-django-applications-production-apis",
+      "excerpt": "Essential configurations for securing Django web apps, including ORM parameter safety, CSRF cookie security, and rate-limiting throttles.",
+      "content": "Django is celebrated for its \"secure by default\" philosophy, but production deployments still require intentional defense-in-depth configuration.\n\n### Crucial Security Headers\nEnsure your `settings.py` enforces strict transport security and prevents clickjacking:\n```python\nSECURE_HSTS_SECONDS = 31536000\nSECURE_HSTS_INCLUDE_SUBDOMAINS = True\nSECURE_HSTS_PRELOAD = True\nSECURE_SSL_REDIRECT = True\nSESSION_COOKIE_SECURE = True\nCSRF_COOKIE_SECURE = True\nX_FRAME_OPTIONS = 'DENY'\n```\n\n### Defending Against ORM Injection\nWhile Django ORM prevents classic SQL injection via parameterization, unvalidated `**kwargs` passed into query filters can allow unauthorized data traversal. Always scope queries to the authenticated user object.",
+      "category": "Development & Scripting",
+      "tags": [
+        "Python",
+        "Django",
+        "Web Security",
+        "Secure Coding"
+      ],
+      "readTime": "7 min read",
+      "isPublished": true,
+      "publishedAt": "2026-10-27T04:16:37.074Z",
+      "createdAt": "2026-10-27T04:16:37.074Z",
+      "updatedAt": "2026-10-27T04:16:37.074Z"
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "msg-1793074603420",
+      "name": "Alex Morgan",
+      "email": "alex@example.com",
+      "subject": "Urgent WordPress Malware Audit",
+      "message": "We detected suspicious redirects on our production blog and need manual forensic remediation.",
+      "ipHash": "3e48ef9d22e096da",
+      "isRead": false,
+      "isArchived": false,
+      "createdAt": "2026-10-27T04:16:43.420Z"
+    }
+  ],
+  "mediaLibrary": [],
+  "auditLogs": [
+    {
+      "id": "log-1793074612317-tz3e",
+      "action": "ADMIN_LOGIN_SUCCESS",
+      "entityType": "Auth",
+      "details": "Admin logged in successfully: raihanhossenpabel678@gmail.com",
+      "createdAt": "2026-10-27T04:16:52.317Z"
+    },
+    {
+      "id": "log-1793074608029-s9zo",
+      "action": "ADMIN_LOGIN_SUCCESS",
+      "entityType": "Auth",
+      "details": "Admin logged in successfully: raihanhossenpabel678@gmail.com",
+      "createdAt": "2026-10-27T04:16:48.029Z"
+    },
+    {
+      "id": "log-1793074603421-shzj",
+      "action": "RECEIVE_CONTACT_INQUIRY",
+      "entityType": "ContactMessage",
+      "entityId": "msg-1793074603420",
+      "details": "Inquiry from Alex Morgan (alex@example.com)",
+      "createdAt": "2026-10-27T04:16:43.421Z"
+    },
+    {
+      "id": "log-init",
+      "action": "SYSTEM_INITIALIZED",
+      "entityType": "System",
+      "details": "Initialized portfolio database engine for MD. Raihan Hossen Rajib",
+      "createdAt": "2026-10-27T04:16:37.074Z"
+    }
+  ]
+}
