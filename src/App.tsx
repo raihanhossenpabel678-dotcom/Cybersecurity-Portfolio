@@ -34,6 +34,15 @@ import {
   fetchAdminMedia,
   fetchAdminSettings
 } from './lib/api';
+import {
+  initialSettings,
+  initialServices,
+  initialProjects,
+  initialCaseStudies,
+  initialSkills,
+  initialCertifications,
+  initialBlogPosts
+} from './server/seedData';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HeroSection } from './components/HeroSection';
@@ -81,15 +90,57 @@ export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname || '/');
   const [initialContactService, setInitialContactService] = useState<string>('');
 
-  // Public Data State
-  const [settings, setSettings] = useState<WebsiteSettings | null>(null);
-  const [services, setServices] = useState<ServiceItem[]>([]);
-  const [projects, setProjects] = useState<ProjectItem[]>([]);
-  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>([]);
-  const [skills, setSkills] = useState<SkillItem[]>([]);
-  const [certifications, setCertifications] = useState<CertificationItem[]>([]);
-  const [blogPosts, setBlogPosts] = useState<BlogPostItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  // Public Data State with resilient immediate fallbacks
+  const [settings, setSettings] = useState<WebsiteSettings>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_settings');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialSettings;
+  });
+  const [services, setServices] = useState<ServiceItem[]>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_services');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialServices;
+  });
+  const [projects, setProjects] = useState<ProjectItem[]>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_projects');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialProjects;
+  });
+  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_case_studies');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialCaseStudies;
+  });
+  const [skills, setSkills] = useState<SkillItem[]>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_skills');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialSkills;
+  });
+  const [certifications, setCertifications] = useState<CertificationItem[]>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_certifications');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialCertifications;
+  });
+  const [blogPosts, setBlogPosts] = useState<BlogPostItem[]>(() => {
+    try {
+      const cached = localStorage.getItem('rajib_website_blog_posts');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+    return initialBlogPosts;
+  });
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Admin Data State
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(false);
@@ -136,15 +187,15 @@ export default function App() {
         fetchPublicCertifications(),
         fetchPublicBlog()
       ]);
-      setSettings(s);
-      setServices(srv);
-      setProjects(p);
-      setCaseStudies(cs);
-      setSkills(sk);
-      setCertifications(cert);
-      setBlogPosts(b);
+      if (s) setSettings(s);
+      if (Array.isArray(srv) && srv.length > 0) setServices(srv);
+      if (Array.isArray(p) && p.length > 0) setProjects(p);
+      if (Array.isArray(cs) && cs.length > 0) setCaseStudies(cs);
+      if (Array.isArray(sk) && sk.length > 0) setSkills(sk);
+      if (Array.isArray(cert) && cert.length > 0) setCertifications(cert);
+      if (Array.isArray(b) && b.length > 0) setBlogPosts(b);
     } catch (err) {
-      console.error('Failed to load public data:', err);
+      console.warn('Public data notice (falling back to initial data):', err);
     } finally {
       setLoading(false);
     }
@@ -202,7 +253,7 @@ export default function App() {
     navigate('/');
   };
 
-  if (loading || !settings) {
+  if (loading && !settings) {
     return (
       <div className="min-h-screen bg-[#08080D] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
