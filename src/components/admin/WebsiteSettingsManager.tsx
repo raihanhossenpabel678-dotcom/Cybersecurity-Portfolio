@@ -8,10 +8,12 @@ import {
   User,
   Shield,
   ExternalLink,
-  Eye
+  Eye,
+  KeyRound,
+  Lock
 } from 'lucide-react';
 import { WebsiteSettings } from '../../types';
-import { updateAdminSettings, uploadMediaFile } from '../../lib/api';
+import { updateAdminSettings, uploadMediaFile, updateAdminCredentials } from '../../lib/api';
 
 interface WebsiteSettingsManagerProps {
   settings: WebsiteSettings;
@@ -27,6 +29,64 @@ export const WebsiteSettingsManager: React.FC<WebsiteSettingsManagerProps> = ({
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  // Security Credentials & 3 Questions configuration state
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [q1Answer, setQ1Answer] = useState('');
+  const [q2Answer, setQ2Answer] = useState('');
+  const [q3Answer, setQ3Answer] = useState('');
+  const [credLoading, setCredLoading] = useState(false);
+  const [credSuccess, setCredSuccess] = useState('');
+  const [credError, setCredError] = useState('');
+
+  const handleUpdateCredentials = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCredLoading(true);
+    setCredError('');
+    setCredSuccess('');
+
+    try {
+      const payload: {
+        email?: string;
+        password?: string;
+        securityQuestions?: { id: string; question: string; answer: string }[];
+      } = {};
+
+      if (adminEmail.trim()) {
+        payload.email = adminEmail.trim();
+      }
+      if (adminPassword.trim()) {
+        if (adminPassword.length < 6) {
+          throw new Error('New password must be at least 6 characters long.');
+        }
+        payload.password = adminPassword;
+      }
+      if (q1Answer.trim() || q2Answer.trim() || q3Answer.trim()) {
+        if (!q1Answer.trim() || !q2Answer.trim() || !q3Answer.trim()) {
+          throw new Error('Please provide answers for all 3 security questions.');
+        }
+        payload.securityQuestions = [
+          { id: 'q1', question: 'First school you attend', answer: q1Answer.trim() },
+          { id: 'q2', question: 'First pet', answer: q2Answer.trim() },
+          { id: 'q3', question: 'Born city', answer: q3Answer.trim() }
+        ];
+      }
+
+      if (Object.keys(payload).length === 0) {
+        throw new Error('Please fill in at least one field to update credentials.');
+      }
+
+      await updateAdminCredentials(payload);
+      setCredSuccess('Administrator credentials & security question answers updated successfully!');
+      setAdminPassword('');
+      setTimeout(() => setCredSuccess(''), 4000);
+    } catch (err: any) {
+      setCredError(err.message || 'Failed to update credentials.');
+    } finally {
+      setCredLoading(false);
+    }
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -325,6 +385,118 @@ export const WebsiteSettingsManager: React.FC<WebsiteSettingsManagerProps> = ({
           </button>
         </div>
       </form>
+
+      {/* Section 5: Administrator Security & 3 Security Questions Configuration */}
+      <div className="p-6 rounded-2xl bg-[#101019] border border-purple-900/40 space-y-6 pt-6">
+        <div>
+          <h3 className="text-sm font-bold text-white uppercase tracking-wider text-purple-300 flex items-center gap-2">
+            <KeyRound className="w-4 h-4 text-cyan-400" />
+            <span>Administrator Security & 3 Security Questions Configuration</span>
+          </h3>
+          <p className="text-xs text-slate-400 mt-1">
+            Update your master admin email (username), password, and personalize the verified answers to your 3 security questions.
+          </p>
+        </div>
+
+        {credSuccess && (
+          <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+            <span>{credSuccess}</span>
+          </div>
+        )}
+
+        {credError && (
+          <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-800/60 text-rose-300 text-xs flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+            <span>{credError}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleUpdateCredentials} className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-purple-400" />
+                <span>Update Administrator Email / Username</span>
+              </label>
+              <input
+                type="email"
+                value={adminEmail}
+                onChange={(e) => setAdminEmail(e.target.value)}
+                placeholder="Leave blank to keep current"
+                className="w-full px-3 py-2 rounded-lg bg-[#15111F] border border-purple-950 text-xs text-white focus:outline-none focus:border-purple-600 transition-colors"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-purple-400" />
+                <span>Update Master Password (min 6 chars)</span>
+              </label>
+              <input
+                type="password"
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                placeholder="Leave blank to keep current"
+                className="w-full px-3 py-2 rounded-lg bg-[#15111F] border border-purple-950 text-xs text-white focus:outline-none focus:border-purple-600 transition-colors"
+              />
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-purple-950/60 space-y-3">
+            <div className="text-xs font-semibold uppercase tracking-wider text-purple-300 flex items-center gap-1.5">
+              <Shield className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Update Answers for the 3 Security Questions</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-slate-300">1. First school you attend</label>
+                <input
+                  type="text"
+                  value={q1Answer}
+                  onChange={(e) => setQ1Answer(e.target.value)}
+                  placeholder="Enter your answer"
+                  className="w-full px-3 py-2 rounded-lg bg-[#15111F] border border-purple-950 text-xs text-white focus:outline-none focus:border-purple-600 transition-colors"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-slate-300">2. First pet</label>
+                <input
+                  type="text"
+                  value={q2Answer}
+                  onChange={(e) => setQ2Answer(e.target.value)}
+                  placeholder="Enter your answer"
+                  className="w-full px-3 py-2 rounded-lg bg-[#15111F] border border-purple-950 text-xs text-white focus:outline-none focus:border-purple-600 transition-colors"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-medium text-slate-300">3. Born city</label>
+                <input
+                  type="text"
+                  value={q3Answer}
+                  onChange={(e) => setQ3Answer(e.target.value)}
+                  placeholder="Enter your answer"
+                  className="w-full px-3 py-2 rounded-lg bg-[#15111F] border border-purple-950 text-xs text-white focus:outline-none focus:border-purple-600 transition-colors"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              disabled={credLoading}
+              className="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 disabled:opacity-50 shadow-lg flex items-center gap-2 cursor-pointer"
+            >
+              <KeyRound className="w-3.5 h-3.5 text-cyan-300" />
+              <span>{credLoading ? 'Updating Credentials...' : 'Save Security Credentials & Answers'}</span>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

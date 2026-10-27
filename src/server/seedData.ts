@@ -19,7 +19,7 @@ export const initialSettings: WebsiteSettings = {
   fiverrUrl: 'https://www.fiverr.com',
   linkedinUrl: 'https://www.linkedin.com',
   githubUrl: 'https://github.com',
-  profilePhotoUrl: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_original/v1/attachments/profile/photo/f01567e5c00751cdd212c4226e87b056-1783586978424/26de0cae-3903-4085-ad24-89ad1017ca54.jpg',
+  profilePhotoUrl: "/uploads/profile-photo.jpg",
   footerText: '© 2026 MD. RAIHAN HOSSEN RAJIB. Dedicated to proactive web security and ethical application defense.',
   sectionVisibility: {
     projects: true,

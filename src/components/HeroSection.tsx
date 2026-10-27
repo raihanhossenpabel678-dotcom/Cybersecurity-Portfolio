@@ -155,8 +155,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ settings, navigate }) 
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const parent = e.currentTarget.parentElement;
+                        const target = e.currentTarget;
+                        if (!target.src.includes('i.imgur.com')) {
+                          target.src = 'https://i.imgur.com/zKDNVRs.jpeg';
+                          return;
+                        }
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
                         if (parent) {
                           const fallback = parent.querySelector('.photo-fallback');
                           if (fallback) (fallback as HTMLElement).style.display = 'flex';

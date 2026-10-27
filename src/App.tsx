@@ -34,15 +34,6 @@ import {
   fetchAdminMedia,
   fetchAdminSettings
 } from './lib/api';
-import {
-  initialSettings,
-  initialServices,
-  initialProjects,
-  initialCaseStudies,
-  initialSkills,
-  initialCertifications,
-  initialBlogPosts
-} from './server/seedData';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HeroSection } from './components/HeroSection';
@@ -90,57 +81,15 @@ export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname || '/');
   const [initialContactService, setInitialContactService] = useState<string>('');
 
-  // Public Data State (Pre-populated with seed data so Vercel loads instantly without blocking)
-  const [settings, setSettings] = useState<WebsiteSettings>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_settings');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialSettings;
-  });
-  const [services, setServices] = useState<ServiceItem[]>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_services');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialServices;
-  });
-  const [projects, setProjects] = useState<ProjectItem[]>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_projects');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialProjects;
-  });
-  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_caseStudies');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialCaseStudies;
-  });
-  const [skills, setSkills] = useState<SkillItem[]>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_skills');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialSkills;
-  });
-  const [certifications, setCertifications] = useState<CertificationItem[]>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_certifications');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialCertifications;
-  });
-  const [blogPosts, setBlogPosts] = useState<BlogPostItem[]>(() => {
-    try {
-      const cached = localStorage.getItem('rajib_blogPosts');
-      if (cached) return JSON.parse(cached);
-    } catch {}
-    return initialBlogPosts;
-  });
-  const [loading, setLoading] = useState<boolean>(false);
+  // Public Data State
+  const [settings, setSettings] = useState<WebsiteSettings | null>(null);
+  const [services, setServices] = useState<ServiceItem[]>([]);
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
+  const [caseStudies, setCaseStudies] = useState<CaseStudyItem[]>([]);
+  const [skills, setSkills] = useState<SkillItem[]>([]);
+  const [certifications, setCertifications] = useState<CertificationItem[]>([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPostItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Admin Data State
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(false);
@@ -187,15 +136,15 @@ export default function App() {
         fetchPublicCertifications(),
         fetchPublicBlog()
       ]);
-      if (s) setSettings(s);
-      if (srv && srv.length > 0) setServices(srv);
-      if (p && p.length > 0) setProjects(p);
-      if (cs && cs.length > 0) setCaseStudies(cs);
-      if (sk && sk.length > 0) setSkills(sk);
-      if (cert && cert.length > 0) setCertifications(cert);
-      if (b && b.length > 0) setBlogPosts(b);
+      setSettings(s);
+      setServices(srv);
+      setProjects(p);
+      setCaseStudies(cs);
+      setSkills(sk);
+      setCertifications(cert);
+      setBlogPosts(b);
     } catch (err) {
-      console.warn('Backend sync notice (running in offline/static mode):', err);
+      console.error('Failed to load public data:', err);
     } finally {
       setLoading(false);
     }
@@ -239,11 +188,11 @@ export default function App() {
 
   useEffect(() => {
     loadPublicData();
-    testFirestoreConnection().catch(() => {});
+    testFirestoreConnection();
     checkAuth().then((auth) => {
       setIsAdminAuthenticated(auth);
       if (auth) loadAdminData();
-    }).catch(() => {});
+    });
   }, [loadPublicData, loadAdminData]);
 
   // Handle Logout
@@ -253,8 +202,7 @@ export default function App() {
     navigate('/');
   };
 
-  // Safe Loading Screen (Only displays if settings are completely absent)
-  if (loading && !settings) {
+  if (loading || !settings) {
     return (
       <div className="min-h-screen bg-[#08080D] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
@@ -270,7 +218,7 @@ export default function App() {
   }
 
   // Admin Route
-  if (currentPath === '/admin') {
+  if (currentPath === '/rkadmin' || currentPath === '/rkadmin/') {
     if (!isAdminAuthenticated) {
       return (
         <AdminLogin
@@ -675,7 +623,8 @@ export default function App() {
           '/certifications',
           '/blog',
           '/contact',
-          '/admin'
+          '/rkadmin',
+          '/rkadmin/'
         ].includes(currentPath) && (
           <NotFoundView navigate={navigate} />
         )}

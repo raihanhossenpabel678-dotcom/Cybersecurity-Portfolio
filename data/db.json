@@ -10,7 +10,7 @@
     "fiverrUrl": "https://www.fiverr.com",
     "linkedinUrl": "https://www.linkedin.com",
     "githubUrl": "https://github.com",
-    "profilePhotoUrl": "https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_original/v1/attachments/profile/photo/f01567e5c00751cdd212c4226e87b056-1783586978424/26de0cae-3903-4085-ad24-89ad1017ca54.jpg",
+    "profilePhotoUrl": "/uploads/profile-photo.jpg",
     "footerText": "© 2026 MD. RAIHAN HOSSEN RAJIB. Dedicated to proactive web security and ethical application defense.",
     "sectionVisibility": {
       "projects": true,
@@ -576,6 +576,27 @@
   "mediaLibrary": [],
   "auditLogs": [
     {
+      "id": "log-1793099378653-rshe",
+      "action": "ADMIN_LOGIN_SUCCESS",
+      "entityType": "Auth",
+      "details": "Admin logged in successfully: raihanhossenpabel678@gmail.com",
+      "createdAt": "2026-10-27T11:09:38.653Z"
+    },
+    {
+      "id": "log-1793098461145-5mwr",
+      "action": "ADMIN_CREDENTIALS_RESET",
+      "entityType": "Auth",
+      "details": "Credentials reset via verified security questions. Active email: raihanhossenpabel678@gmail.com",
+      "createdAt": "2026-10-27T10:54:21.145Z"
+    },
+    {
+      "id": "log-1793098452782-jgay",
+      "action": "SECURITY_QUESTION_FAILED",
+      "entityType": "Auth",
+      "details": "Failed attempt to reset credentials via security questions",
+      "createdAt": "2026-10-27T10:54:12.782Z"
+    },
+    {
       "id": "log-1793074612317-tz3e",
       "action": "ADMIN_LOGIN_SUCCESS",
       "entityType": "Auth",
@@ -604,5 +625,26 @@
       "details": "Initialized portfolio database engine for MD. Raihan Hossen Rajib",
       "createdAt": "2026-10-27T04:16:37.074Z"
     }
-  ]
+  ],
+  "adminAuth": {
+    "email": "raihanhossenpabel678@gmail.com",
+    "password": "RajibSecure2026!",
+    "securityQuestions": [
+      {
+        "id": "q1",
+        "question": "First school you attend",
+        "answer": "arena web security"
+      },
+      {
+        "id": "q2",
+        "question": "First pet",
+        "answer": "tommy"
+      },
+      {
+        "id": "q3",
+        "question": "Born city",
+        "answer": "dhaka"
+      }
+    ]
+  }
 }

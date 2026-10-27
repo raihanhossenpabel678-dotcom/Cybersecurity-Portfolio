@@ -42,18 +42,18 @@ export const defaultAdminAuth: AdminAuthData = {
   securityQuestions: [
     {
       id: 'q1',
-      question: 'Where did you complete your Diploma in Cyber Security?',
+      question: 'First school you attend',
       answer: 'arena web security'
     },
     {
       id: 'q2',
-      question: 'What is your primary specialized CMS security area?',
-      answer: 'wordpress'
+      question: 'First pet',
+      answer: 'tommy'
     },
     {
       id: 'q3',
-      question: 'What programming language and framework do you develop security tools with?',
-      answer: 'python'
+      question: 'Born city',
+      answer: 'dhaka'
     }
   ]
 };
@@ -166,14 +166,10 @@ class DatabaseEngine {
       const given = (answers[q.id] || '').trim().toLowerCase();
       const expected = q.answer.trim().toLowerCase();
       if (!given) return false;
-      // Tolerant keyword matching (e.g., 'arena', 'arena web security', 'wordpress', 'python', 'django')
       const isMatch =
         given === expected ||
         given.includes(expected) ||
-        expected.includes(given) ||
-        (q.id === 'q1' && (given.includes('arena') || given.includes('security'))) ||
-        (q.id === 'q2' && given.includes('word')) ||
-        (q.id === 'q3' && (given.includes('py') || given.includes('django')));
+        expected.includes(given);
       if (!isMatch) return false;
     }
     return true;
@@ -186,6 +182,26 @@ class DatabaseEngine {
     this.data.adminAuth.password = newPassword;
     this.saveData();
     this.logAction('ADMIN_PASSWORD_RESET', 'Auth', undefined, 'Password successfully reset via security questions');
+  }
+
+  updateAdminCredentials(newPassword: string, newEmail?: string): void {
+    if (!this.data.adminAuth) {
+      this.data.adminAuth = { ...defaultAdminAuth };
+    }
+    if (newEmail && newEmail.trim().length > 0) {
+      this.data.adminAuth.email = newEmail.trim().toLowerCase();
+    }
+    if (newPassword && newPassword.trim().length > 0) {
+      this.data.adminAuth.password = newPassword;
+    }
+    this.saveData();
+    this.logAction('ADMIN_CREDENTIALS_RESET', 'Auth', undefined, `Credentials reset via verified security questions. Active email: ${this.data.adminAuth.email}`);
+  }
+
+  updateAdminAuth(auth: AdminAuthData): void {
+    this.data.adminAuth = { ...auth };
+    this.saveData();
+    this.logAction('UPDATE_ADMIN_AUTH', 'Auth', undefined, `Updated admin auth credentials and security questions for ${auth.email}`);
   }
 
   private saveData(dataToSave?: DatabaseData) {

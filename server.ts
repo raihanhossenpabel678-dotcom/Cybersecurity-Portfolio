@@ -202,25 +202,25 @@ app.get('/api/auth/security-questions', (_req: Request, res: Response) => {
 });
 
 app.post('/api/auth/reset-password', rateLimiter(10, 15 * 60 * 1000), (req: Request, res: Response) => {
-  const { answers, newPassword } = req.body;
+  const { answers, newPassword, newEmail } = req.body;
   if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 6) {
     return res.status(400).json({ error: 'New password must be at least 6 characters long' });
   }
 
   const isVerified = db.verifySecurityQuestions(answers);
   if (!isVerified) {
-    db.logAction('SECURITY_QUESTION_FAILED', 'Auth', undefined, 'Failed attempt to reset password via security questions');
+    db.logAction('SECURITY_QUESTION_FAILED', 'Auth', undefined, 'Failed attempt to reset credentials via security questions');
     return res.status(401).json({
-      error: 'Security question verification failed. Please check your answers.'
+      error: 'Security question verification failed. All 3 questions must be answered correctly.'
     });
   }
 
-  db.updateAdminPassword(newPassword);
+  db.updateAdminCredentials(newPassword, newEmail);
   const auth = db.getAdminAuth();
   const token = generateToken(auth.email);
   return res.json({
     success: true,
-    message: 'Admin password reset successfully! Session authenticated.',
+    message: 'Admin username and password reset successfully! Session authenticated.',
     token,
     user: {
       email: auth.email,
@@ -228,6 +228,22 @@ app.post('/api/auth/reset-password', rateLimiter(10, 15 * 60 * 1000), (req: Requ
       role: 'Administrator'
     }
   });
+});
+
+app.put('/api/admin/auth-credentials', requireAdmin, (req: Request, res: Response) => {
+  const { email, password, securityQuestions } = req.body;
+  const currentAuth = { ...db.getAdminAuth() };
+  if (email && typeof email === 'string' && email.includes('@')) {
+    currentAuth.email = email.trim().toLowerCase();
+  }
+  if (password && typeof password === 'string' && password.length >= 6) {
+    currentAuth.password = password;
+  }
+  if (Array.isArray(securityQuestions) && securityQuestions.length === 3) {
+    currentAuth.securityQuestions = securityQuestions;
+  }
+  db.updateAdminAuth(currentAuth);
+  res.json({ success: true, message: 'Administrator credentials and security questions updated successfully' });
 });
 
 app.get('/api/auth/me', (req: Request, res: Response) => {

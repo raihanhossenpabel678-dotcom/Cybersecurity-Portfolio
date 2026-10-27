@@ -62,21 +62,15 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
   throw new Error(JSON.stringify(errInfo));
 }
 
-// Connection test with safety timeout to prevent hanging on network stalls
+// Connection test as required by Firebase skill
 export async function testFirestoreConnection(): Promise<boolean> {
   try {
-    const timeoutPromise = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error('Connection check timeout')), 2500)
-    );
-    await Promise.race([
-      getDocFromServer(doc(db, 'test', 'connection')),
-      timeoutPromise
-    ]);
+    await getDocFromServer(doc(db, 'test', 'connection'));
     console.log('Firestore connection verified successfully.');
     return true;
   } catch (error) {
     if (error instanceof Error && error.message.includes('the client is offline')) {
-      console.warn('Firestore offline or pending connection.');
+      console.error('Please check your Firebase configuration.');
     }
     return false;
   }

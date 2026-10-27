@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Lock, ExternalLink, Mail, Github, Linkedin } from 'lucide-react';
+import { Shield, ExternalLink, Mail, Github, Linkedin } from 'lucide-react';
 import { WebsiteSettings } from '../types';
 
 interface FooterProps {
@@ -130,15 +130,6 @@ export const Footer: React.FC<FooterProps> = ({ navigate, settings }) => {
               <li>
                 <button onClick={() => navigate('/contact')} className="hover:text-[#C084FC] transition-colors">
                   Encrypted Inquiry
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => navigate('/admin')}
-                  className="text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors text-xs font-mono pt-1"
-                >
-                  <Lock className="w-3 h-3" />
-                  <span>Admin Authentication</span>
                 </button>
               </li>
             </ul>
