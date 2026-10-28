@@ -46,6 +46,7 @@ import {
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
+import { AtomicBondingBackground } from './components/AtomicBondingBackground';
 import { HeroSection } from './components/HeroSection';
 import { AboutView } from './components/public/AboutView';
 import { ServicesView } from './components/public/ServicesView';
@@ -336,6 +337,7 @@ export default function App() {
   // Public View Router
   return (
     <div className="min-h-screen bg-[#060814] text-slate-100 flex flex-col font-sans relative selection:bg-sky-500/30 selection:text-white">
+      <AtomicBondingBackground />
       <MouseTracer />
       <Navbar currentPath={currentPath} navigate={navigate} />
 
