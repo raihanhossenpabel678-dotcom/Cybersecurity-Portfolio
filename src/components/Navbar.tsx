@@ -41,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
             </div>
             <div className="flex flex-col">
               <span className="font-mono text-xs tracking-widest uppercase text-sky-400 font-semibold">
-                SECURITY // PORTFOLIO
+                MD. RAIHAN HOSSEN RAJIB
               </span>
             </div>
           </button>

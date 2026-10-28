@@ -45,6 +45,7 @@ import {
 } from './server/seedData';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { BackToTop } from './components/BackToTop';
 import { HeroSection } from './components/HeroSection';
 import { AboutView } from './components/public/AboutView';
 import { ServicesView } from './components/public/ServicesView';
@@ -682,6 +683,7 @@ export default function App() {
       </main>
 
       <Footer navigate={navigate} settings={settings} />
+      <BackToTop />
     </div>
   );
 }
